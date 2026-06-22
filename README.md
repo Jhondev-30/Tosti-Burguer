@@ -1,4 +1,4 @@
-# 🍔 TostiBurguer — Landing Page
+# TostiBurguer — Landing Page
 
 > Sitio web oficial de **TostiBurguer**, hamburguesería artesanal especializada en smash burgers, perros XL, papas crujientes y refrescos. Página de una sola vista (single-page) con menú interactivo y panel de combos.
 
@@ -9,7 +9,7 @@
 
 ---
 
-## 📋 Tabla de Contenidos
+## Tabla de Contenidos
 
 - [Descripción](#-descripción)
 - [Demo en vivo](#-demo-en-vivo)
@@ -27,7 +27,7 @@
 
 ---
 
-## 🧾 Descripción
+## Descripción
 
 **TostiBurguer** es el sitio web comercial de una hamburguesería con operación local y servicio a domicilio. El objetivo del proyecto es ofrecer una presencia digital rápida, visualmente atractiva y orientada a conversión, donde el cliente pueda:
 
@@ -40,13 +40,13 @@ El proyecto fue diseñado siguiendo una estética **diner retro americano con tw
 
 ---
 
-## 🚀 Demo en vivo
+## Demo en vivo
 
-🔗 **URL pública:** [https://agent-cdn.minimax.io/mcp/anon/general/1782086658_010feacb.html](https://agent-cdn.minimax.io/mcp/anon/general/1782086658_010feacb.html)
+**URL pública:** [https://agent-cdn.minimax.io/mcp/anon/general/1782086658_010feacb.html](https://agent-cdn.minimax.io/mcp/anon/general/1782086658_010feacb.html)
 
 ---
 
-## 📸 Capturas de pantalla
+## Capturas de pantalla
 
 ### Hero
 ![Hero de TostiBurguer](shots/01_hero.png)
@@ -71,13 +71,13 @@ El proyecto fue diseñado siguiendo una estética **diner retro americano con tw
 
 ---
 
-## ✨ Características
+## Características
 
 | Feature | Descripción |
 |---|---|
 | **Single-page layout** | Una sola URL, navegación con scroll suave a secciones (`#menu`, `#combos`, `#about`, `#contact`). |
 | **Hero cinematrográfico** | Imagen smash burger con `kenburns` (24s loop) + overlay oscuro con viñeta para legibilidad del headline. |
-| **Menú filtrable** | 14 productos en 4 categorías (🍔 Burgers · 🌭 Perros · 🍟 Papas · 🥤 Refrescos) con filtro sticky. |
+| **Menú filtrable** | 14 productos en 4 categorías ( Burgers · Perros · Papas · Refrescos) con filtro sticky. |
 | **HTML5 Canvas overlay** | Spotlight radial con el color de cada categoría al hacer hover sobre las cards del menú. |
 | **Combos** | 3 paquetes con precio tachado + precio final destacado. |
 | **WhatsApp CTA** | Botón flotante con deep link a `wa.me` con mensaje pre-llenado. |
@@ -90,7 +90,7 @@ El proyecto fue diseñado siguiendo una estética **diner retro americano con tw
 
 ---
 
-## 🛠 Stack técnico
+## Stack técnico
 
 - **HTML5** — semántico (`<header>`, `<section>`, `<article>`, `<nav>`, `<footer>`).
 - **CSS3** — Custom properties (`:root` tokens), Grid, Flexbox, animaciones (`@keyframes`), `backdrop-filter`, `mix-blend-mode`.
@@ -103,44 +103,44 @@ El proyecto fue diseñado siguiendo una estética **diner retro americano con tw
 
 ---
 
-## 📁 Estructura del proyecto
+## Estructura del proyecto
 
 ```
 tostiburguer/
-├── index.html              # Página principal (single-file)
-├── README.md               # Este archivo
-├── spec.md                 # Design spec (paleta, tipografía, secciones)
-├── imgs/                   # 17 imágenes optimizadas (logo, hero, productos, about)
-│   ├── logo.jpg
-│   ├── hero.jpg
-│   ├── about.jpg
-│   ├── burger_1.jpg ... burger_5.jpg
-│   ├── hotdog_1.jpg ... hotdog_3.jpg
-│   ├── fries_1.jpg ... fries_3.jpg
-│   └── drink_1.jpg ... drink_3.jpg
-├── shots/                  # Capturas de Playwright para QA visual
-│   ├── 01_hero.png
-│   ├── 02_menu.png
-│   ├── 03_menu_hover.png
-│   ├── 04_combos.png
-│   ├── 05_about.png
-│   ├── 06_contact.png
-│   └── 07_mobile.png
-└── _upload_args/           # Argumentos JSON para deploy (generados por script)
+├── index.html # Página principal (single-file)
+├── README.md # Este archivo
+├── spec.md # Design spec (paleta, tipografía, secciones)
+├── imgs/ # 17 imágenes optimizadas (logo, hero, productos, about)
+│ ├── logo.jpg
+│ ├── hero.jpg
+│ ├── about.jpg
+│ ├── burger_1.jpg ... burger_5.jpg
+│ ├── hotdog_1.jpg ... hotdog_3.jpg
+│ ├── fries_1.jpg ... fries_3.jpg
+│ └── drink_1.jpg ... drink_3.jpg
+├── shots/ # Capturas de Playwright para QA visual
+│ ├── 01_hero.png
+│ ├── 02_menu.png
+│ ├── 03_menu_hover.png
+│ ├── 04_combos.png
+│ ├── 05_about.png
+│ ├── 06_contact.png
+│ └── 07_mobile.png
+└── _upload_args/ # Argumentos JSON para deploy (generados por script)
 ```
 
 > Los archivos que comienzan con `_` son scripts y artefactos de build (no se despliegan en producción).
 
 ---
 
-## 💻 Desarrollo local
+## Desarrollo local
 
 ### Requisitos
 
 - Cualquier servidor estático. Opciones:
-  - **Python 3** — `python -m http.server 8000`
-  - **Node.js** — `npx serve .`
-  - **VS Code** — Extensión *Live Server*
+- **Python 3** — `python -m http.server 8000`
+- **Node.js** — `npx serve .`
+- **VS Code** — Extensión *Live Server*
 
 ### Pasos
 
@@ -162,7 +162,7 @@ open http://localhost:8000
 
 ---
 
-## 📦 Build & Deploy
+## Build & Deploy
 
 El proyecto es 100% estático, así que el deploy es tan simple como subir el `index.html` y la carpeta `imgs/` a cualquier hosting:
 
@@ -182,7 +182,7 @@ El proyecto es 100% estático, así que el deploy es tan simple como subir el `i
 
 ---
 
-## 🎨 Personalización
+## Personalización
 
 ### Cambiar la paleta de colores
 
@@ -190,13 +190,13 @@ Editar las custom properties en el bloque `:root` del `<style>` en `index.html`:
 
 ```css
 :root {
-  --mustard:      #f5b524;   /* Acento principal */
-  --ketchup:      #d8312a;   /* Categoría "Perros" */
-  --lettuce:      #7fa940;   /* Categoría "Refrescos" */
-  --beef:         #8b4a26;   /* Categoría "Burger" */
-  --ink:          #0e0a08;   /* Background principal */
-  --paper:        #faf5e8;   /* Fondo claro */
-  --cream:        #f5ead3;   /* Texto claro */
+--mustard: #f5b524; /* Acento principal */
+--ketchup: #d8312a; /* Categoría "Perros" */
+--lettuce: #7fa940; /* Categoría "Refrescos" */
+--beef: #8b4a26; /* Categoría "Burger" */
+--ink: #0e0a08; /* Background principal */
+--paper: #faf5e8; /* Fondo claro */
+--cream: #f5ead3; /* Texto claro */
 }
 ```
 
@@ -206,8 +206,8 @@ El menú se renderiza dinámicamente desde el array `MENU` en el `<script>` del 
 
 ```js
 { id: 'b1', cat: 'burger', tag: 'CLÁSICA', name: 'Tosti Clásica',
-  price: '$4.50', desc: 'Pan brioche tostado, smash 80g, cheddar, lechuga, tomate y salsa de la casa.',
-  img: 'https://...' }
+price: '$4.50', desc: 'Pan brioche tostado, smash 80g, cheddar, lechuga, tomate y salsa de la casa.',
+img: 'https://...' }
 ```
 
 Categorías válidas: `burger`, `hotdog`, `fries`, `drink`.
@@ -225,7 +225,7 @@ En la sección `#contact`, editar el `href` del botón CTA:
 
 ```html
 <a class="btn btn--primary" href="https://wa.me/584140000000?text=Hola%20TostiBurguer%2C%20quiero%20pedir">
-  PEDIR POR WHATSAPP →
+PEDIR POR WHATSAPP →
 </a>
 ```
 
@@ -233,7 +233,7 @@ Reemplazar `584140000000` por el número real (formato internacional sin `+` ni 
 
 ---
 
-## 🗺 Roadmap
+## Roadmap
 
 - [ ] **v1.1** — Integración con backend para pedidos reales (carrito + checkout).
 - [ ] **v1.1** — Pasarela de pago (Pago Móvil, Zelle, Binance Pay).
@@ -246,7 +246,7 @@ Reemplazar `584140000000` por el número real (formato internacional sin `+` ni 
 
 ---
 
-## 🤝 Contribuciones
+## Contribuciones
 
 Las contribuciones son bienvenidas. Para cambios grandes:
 
@@ -260,7 +260,7 @@ Las contribuciones son bienvenidas. Para cambios grandes:
 
 ---
 
-## 📄 Licencia
+## Licencia
 
 Distribuido bajo la licencia **MIT**. Ver `LICENSE` para más detalles.
 
@@ -275,7 +275,7 @@ de este software y archivos de documentación asociados...
 
 ---
 
-## 👨‍💻 Autor
+## Autor
 
 **Jhon Alex Cordero Perozo**
 
@@ -286,7 +286,7 @@ de este software y archivos de documentación asociados...
 
 ---
 
-## 🙏 Agradecimientos
+## Agradecimientos
 
 - A la familia y equipo de TostiBurguer por la confianza en el proyecto.
 - A la comunidad de **Google Fonts** por las tipografías open source.
@@ -296,5 +296,5 @@ de este software y archivos de documentación asociados...
 ---
 
 <p align="center">
-  Hecho con 🥩 en Venezuela · Smash &amp; Grill desde 2018
+Hecho con en Venezuela · Smash &amp; Grill desde 2018
 </p>

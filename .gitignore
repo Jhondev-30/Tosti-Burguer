@@ -1,0 +1,14 @@
+# Testing & dev artifacts (no subir)
+*.ps1
+*.cjs
+index.html.bak
+shots/
+_upload_args/
+.optimize.tmp
+.mavis-agent/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
