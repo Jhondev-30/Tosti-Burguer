@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TostiBurguer — Smash, perros, papas y refrescos que matan la sed</title>
+<meta name="description" content="TostiBurguer: hamburguesas smash, perros XL, papas crujientes y refrescos. Hecho a la plancha desde 2018.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0e0a08;
+    --charcoal:#1a1410;
+    --smoke:#2a201a;
+    --cream:#f5ead3;
+    --paper:#faf5e8;
+    --paper-dim:#ece1c5;
+    --mustard:#f5b524;
+    --mustard-deep:#c98c12;
+    --ketchup:#d8312a;
+    --ketchup-deep:#9a1d12;
+    --lettuce:#7fa940;
+    --beef:#8b4a26;
+    --bone-dim:#8a7a66;
+    --shadow:0 24px 60px -20px rgba(0,0,0,.55),0 4px 14px -6px rgba(0,0,0,.4);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--ink);color:var(--cream);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{display:block;max-width:100%;height:auto}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  ::selection{background:var(--mustard);color:var(--ink)}
+
+  /* ── NAV ───────────────────────────────────────── */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:80;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 32px;
+    backdrop-filter:blur(12px);
+    background:rgba(14,10,8,.72);
+    border-bottom:1px solid rgba(245,234,211,.08);
+  }
+  .nav__brand{display:flex;align-items:center;gap:14px}
+  .nav__logo{width:46px;height:46px;border-radius:50%;box-shadow:0 8px 20px -8px rgba(245,181,36,.4)}
+  .nav__name{font-family:'Anton',sans-serif;font-size:22px;letter-spacing:1.5px;color:var(--mustard)}
+  .nav__name span{color:var(--cream)}
+  .nav__links{display:flex;gap:28px;font-weight:500;font-size:14px;letter-spacing:.5px}
+  .nav__links a{position:relative;padding:6px 0;color:var(--cream);transition:color .2s}
+  .nav__links a:hover{color:var(--mustard)}
+  .nav__cta{background:var(--mustard);color:var(--ink);padding:10px 22px;border-radius:999px;font-weight:700;font-size:13px;letter-spacing:1px;transition:transform .2s,box-shadow .2s}
+  .nav__cta:hover{transform:translateY(-2px);box-shadow:0 10px 24px -10px rgba(245,181,36,.6)}
+  @media(max-width:780px){.nav__links{display:none}.nav{padding:14px 18px}.nav__logo{width:38px;height:38px}.nav__name{font-size:18px}}
+
+  /* ── HERO ──────────────────────────────────────── */
+  .hero{
+    position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;
+    overflow:hidden;padding:120px 32px 80px;
+  }
+  .hero__bg{
+    position:absolute;inset:0;z-index:0;
+    background-image:url('https://agent-cdn.minimax.io/mcp/anon/general/1782082343_62e76dae.jpg');
+    background-size:cover;background-position:center;
+    filter:saturate(1.1) contrast(1.05);
+    animation:kenburns 28s ease-in-out infinite alternate;
+  }
+  .hero__bg::after{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse at 30% 40%, rgba(14,10,8,.4) 0%, rgba(14,10,8,.85) 70%),
+      linear-gradient(180deg, rgba(14,10,8,.55) 0%, rgba(14,10,8,.85) 60%, var(--ink) 100%);
+  }
+  .hero__inner{position:relative;z-index:2;max-width:1100px;text-align:center}
+  .hero__badge{
+    display:inline-block;padding:8px 18px;border:1px solid var(--mustard);color:var(--mustard);
+    border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:3px;
+    text-transform:uppercase;margin-bottom:28px;background:rgba(14,10,8,.4);
+  }
+  .hero h1{
+    font-family:'Anton',sans-serif;
+    font-size:clamp(64px,12vw,220px);
+    line-height:.9;letter-spacing:-1px;
+    color:var(--cream);
+    text-transform:uppercase;
+    text-shadow:0 6px 30px rgba(0,0,0,.5);
+  }
+  .hero h1 .accent{color:var(--mustard);display:inline-block;transform:rotate(-2deg)}
+  .hero__sub{
+    margin:32px auto 0;max-width:640px;font-size:clamp(16px,1.6vw,20px);color:var(--cream);
+    opacity:.92;line-height:1.5;
+  }
+  .hero__ctas{display:flex;gap:16px;justify-content:center;margin-top:40px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:18px 32px;border-radius:999px;font-weight:700;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;transition:transform .25s,box-shadow .25s,background .25s}
+  .btn--primary{background:var(--mustard);color:var(--ink);box-shadow:0 14px 30px -12px rgba(245,181,36,.55)}
+  .btn--primary:hover{transform:translateY(-3px);box-shadow:0 18px 36px -12px rgba(245,181,36,.7)}
+  .btn--ghost{background:transparent;color:var(--cream);border:1px solid rgba(245,234,211,.3)}
+  .btn--ghost:hover{background:rgba(245,234,211,.08);border-color:var(--cream)}
+
+  .hero__scroll{
+    position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:3;
+    display:flex;flex-direction:column;align-items:center;gap:10px;
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--cream);
+    opacity:.7;
+  }
+  .hero__scroll::after{content:"";width:1px;height:36px;background:var(--cream);animation:scrollPulse 1.6s ease-in-out infinite}
+  @keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+  @keyframes kenburns{0%{transform:scale(1) translate(0,0)}100%{transform:scale(1.08) translate(-1.5%,-1%)}}
+
+  /* ── MARQUEE ───────────────────────────────────── */
+  .marquee{
+    background:var(--mustard);color:var(--ink);
+    padding:22px 0;overflow:hidden;
+    border-top:4px solid var(--ink);border-bottom:4px solid var(--ink);
+  }
+  .marquee__track{display:flex;gap:48px;animation:marquee 30s linear infinite;white-space:nowrap;will-change:transform}
+  .marquee__item{font-family:'Anton',sans-serif;font-size:clamp(28px,4vw,52px);letter-spacing:2px;display:inline-flex;align-items:center;gap:48px;text-transform:uppercase}
+  .marquee__item::after{content:"★";font-size:.7em;color:var(--ketchup-deep)}
+  @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+  /* ── SECTION CHROME ────────────────────────────── */
+  section{padding:120px 32px;position:relative}
+  .section__head{max-width:1280px;margin:0 auto 64px;display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap}
+  .section__eyebrow{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:4px;color:var(--mustard);text-transform:uppercase;margin-bottom:14px}
+  .section__title{font-family:'Anton',sans-serif;font-size:clamp(40px,6vw,96px);line-height:.95;letter-spacing:-.5px;text-transform:uppercase}
+  .section__title .accent{color:var(--ketchup)}
+  .section__sub{max-width:520px;font-size:16px;line-height:1.6;color:var(--bone-dim)}
+
+  /* ── MENU ──────────────────────────────────────── */
+  .menu{background:var(--paper);color:var(--ink);position:relative;overflow:hidden}
+  .menu::before{
+    content:"";position:absolute;inset:0;
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(216,49,42,.05) 0%, transparent 50%),
+      radial-gradient(circle at 90% 80%, rgba(245,181,36,.08) 0%, transparent 50%);
+    pointer-events:none;
+  }
+  .menu__filter{
+    position:sticky;top:78px;z-index:30;
+    display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-bottom:64px;
+  }
+  .filter__btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 24px;border-radius:999px;
+    background:var(--cream);color:var(--ink);
+    font-weight:700;font-size:13px;letter-spacing:1px;text-transform:uppercase;
+    border:2px solid transparent;
+    transition:all .25s;cursor:pointer;
+  }
+  .filter__btn:hover{transform:translateY(-2px);box-shadow:0 10px 20px -8px rgba(0,0,0,.2)}
+  .filter__btn.is-active{background:var(--ink);color:var(--mustard);border-color:var(--mustard)}
+  .filter__btn .ico{font-size:18px}
+
+  .menu__grid{
+    position:relative;z-index:2;
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:28px;
+    max-width:1280px;margin:0 auto;
+  }
+  #menuCanvas{
+    position:absolute;inset:0;z-index:5;pointer-events:none;
+    mix-blend-mode:multiply;opacity:.85;
+  }
+  .card{
+    position:relative;z-index:2;
+    background:var(--cream);
+    border-radius:20px;overflow:hidden;
+    box-shadow:var(--shadow);
+    transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s;
+    cursor:pointer;
+    border:2px solid transparent;
+    display:flex;flex-direction:column;
+  }
+  .card:hover{transform:translateY(-8px);box-shadow:0 32px 70px -20px rgba(0,0,0,.7),0 6px 18px -6px rgba(0,0,0,.5)}
+  .card.is-hidden{display:none}
+  .card__img{aspect-ratio:1/1;width:100%;background:var(--smoke);overflow:hidden;position:relative}
+  .card__img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .card:hover .card__img img{transform:scale(1.08)}
+  .card__tag{
+    position:absolute;top:14px;left:14px;
+    background:rgba(14,10,8,.85);color:var(--mustard);
+    padding:6px 14px;border-radius:999px;
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;
+    backdrop-filter:blur(6px);
+  }
+  .card__body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .card__head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+  .card__name{font-family:'Anton',sans-serif;font-size:24px;letter-spacing:.5px;color:var(--ink);line-height:1}
+  .card__price{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:22px;color:var(--ketchup-deep);white-space:nowrap}
+  .card__desc{font-size:14px;line-height:1.5;color:var(--smoke);flex:1}
+  .card__add{
+    margin-top:8px;align-self:flex-start;
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--ink);color:var(--mustard);
+    padding:10px 18px;border-radius:999px;
+    font-weight:700;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;
+    transition:transform .2s,background .2s;
+  }
+  .card__add:hover{background:var(--ketchup);color:var(--cream);transform:translateX(4px)}
+
+  /* category accent borders */
+  .card[data-cat="burger"]{border-color:rgba(139,74,38,.2)}
+  .card[data-cat="burger"]:hover{border-color:var(--beef)}
+  .card[data-cat="hotdog"]{border-color:rgba(216,49,42,.2)}
+  .card[data-cat="hotdog"]:hover{border-color:var(--ketchup)}
+  .card[data-cat="fries"]{border-color:rgba(245,181,36,.25)}
+  .card[data-cat="fries"]:hover{border-color:var(--mustard)}
+  .card[data-cat="drink"]{border-color:rgba(127,169,64,.2)}
+  .card[data-cat="drink"]:hover{border-color:var(--lettuce)}
+
+  /* ── COMBOS ────────────────────────────────────── */
+  .combos{background:var(--ink)}
+  .combos .section__title .accent{color:var(--mustard)}
+  .combos__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;max-width:1280px;margin:0 auto}
+  .combo{
+    background:var(--charcoal);border-radius:24px;padding:36px 32px;
+    border:1px solid var(--smoke);
+    position:relative;overflow:hidden;
+    transition:transform .3s,border-color .3s;
+  }
+  .combo::before{
+    content:"";position:absolute;top:-50%;right:-30%;width:300px;height:300px;
+    background:radial-gradient(circle,rgba(245,181,36,.15) 0%,transparent 70%);
+    pointer-events:none;
+  }
+  .combo:hover{transform:translateY(-6px);border-color:var(--mustard)}
+  .combo__num{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:3px;color:var(--mustard);margin-bottom:14px}
+  .combo__name{font-family:'Anton',sans-serif;font-size:36px;line-height:1;color:var(--cream);margin-bottom:14px;letter-spacing:.5px}
+  .combo__items{font-size:14px;color:var(--bone-dim);line-height:1.8;margin-bottom:24px;list-style:none}
+  .combo__items li::before{content:"→ ";color:var(--mustard)}
+  .combo__price{display:flex;align-items:baseline;gap:8px;margin-bottom:24px}
+  .combo__price .now{font-family:'Anton',sans-serif;font-size:48px;color:var(--mustard);line-height:1}
+  .combo__price .old{font-family:'JetBrains Mono',monospace;font-size:18px;color:var(--bone-dim);text-decoration:line-through}
+
+  /* ── ABOUT ─────────────────────────────────────── */
+  .about{background:var(--paper);color:var(--ink)}
+  .about .section__title .accent{color:var(--ketchup)}
+  .about__wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:64px;max-width:1280px;margin:0 auto;align-items:center}
+  .about__img{aspect-ratio:16/9;background:var(--smoke);border-radius:24px;overflow:hidden;box-shadow:var(--shadow)}
+  .about__img img{width:100%;height:100%;object-fit:cover}
+  .about__copy h2{margin-bottom:28px}
+  .about__copy p{font-size:17px;line-height:1.7;color:var(--smoke);margin-bottom:18px}
+  .about__copy p strong{color:var(--ketchup);font-weight:700}
+  .about__stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+  .stat{padding:18px;background:var(--cream);border-radius:14px;border:1px solid var(--paper-dim)}
+  .stat__n{font-family:'Anton',sans-serif;font-size:36px;color:var(--ketchup);line-height:1}
+  .stat__l{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--bone-dim);text-transform:uppercase;margin-top:6px}
+  @media(max-width:880px){.about__wrap{grid-template-columns:1fr;gap:36px}}
+
+  /* ── CONTACT ───────────────────────────────────── */
+  .contact{background:var(--charcoal);text-align:center;position:relative;overflow:hidden}
+  .contact::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 50% 50%,rgba(245,181,36,.12) 0%,transparent 60%);
+    pointer-events:none;
+  }
+  .contact__inner{position:relative;z-index:2;max-width:780px;margin:0 auto}
+  .contact h2{margin-bottom:24px}
+  .contact h2 .accent{color:var(--mustard)}
+  .contact__sub{font-size:18px;color:var(--bone-dim);line-height:1.6;margin-bottom:40px}
+  .contact__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;margin-top:48px}
+  .contact__card{
+    background:rgba(245,234,211,.04);border:1px solid var(--smoke);
+    border-radius:18px;padding:28px 20px;
+    transition:border-color .25s,transform .25s;
+  }
+  .contact__card:hover{border-color:var(--mustard);transform:translateY(-4px)}
+  .contact__ico{font-size:32px;margin-bottom:14px}
+  .contact__lbl{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--mustard);text-transform:uppercase;margin-bottom:8px}
+  .contact__val{font-size:15px;color:var(--cream);line-height:1.4}
+
+  /* ── FOOTER ────────────────────────────────────── */
+  footer{
+    background:var(--ink);border-top:1px solid var(--smoke);
+    padding:48px 32px;text-align:center;
+    font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:2px;color:var(--bone-dim);
+  }
+  footer .brand{font-family:'Anton',sans-serif;font-size:28px;letter-spacing:3px;color:var(--mustard);margin-bottom:8px}
+  footer .copy{margin-top:18px;opacity:.6}
+
+  /* ── REVEAL ────────────────────────────────────── */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+  .reveal.is-in{opacity:1;transform:translateY(0)}
+
+  /* ── RESPONSIVE ────────────────────────────────── */
+  @media(max-width:680px){
+    section{padding:80px 18px}
+    .hero{padding:100px 18px 64px}
+    .menu__filter{top:64px;gap:8px}
+    .filter__btn{padding:10px 16px;font-size:11px;letter-spacing:.5px}
+    .combo{padding:28px 22px}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a class="nav__brand" href="#top">
+    <img class="nav__logo" src="https://agent-cdn.minimax.io/mcp/anon/general/1782082344_b6a357ed.jpg" alt="TostiBurguer" loading="lazy" onerror="this.style.display='none'">
+    <div class="nav__name">TOSTI<span>BURGUER</span></div>
+  </a>
+  <div class="nav__links">
+    <a href="#menu">Menú</a>
+    <a href="#combos">Combos</a>
+    <a href="#about">Nosotros</a>
+    <a href="#contact">Visítanos</a>
+  </div>
+  <a class="nav__cta" href="#contact">PEDIR YA →</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero__bg"></div>
+  <div class="hero__inner">
+    <span class="hero__badge">★ Smash &amp; Grill · Desde 2018 ★</span>
+    <h1>HAMBRE<br>BIEN <span class="accent">RESUELTA.</span></h1>
+    <p class="hero__sub">Smash burgers con queso derritiéndose, perros XL, papas que crujen como deben y refrescos que te salvan el día. Hecho a la plancha, sin atajos.</p>
+    <div class="hero__ctas">
+      <a class="btn btn--primary" href="#menu">VER EL MENÚ ↓</a>
+      <a class="btn btn--ghost" href="#contact">PEDIR A DOMICILIO</a>
+    </div>
+  </div>
+  <div class="hero__scroll">SCROLL</div>
+</header>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span class="marquee__item">HECHO A LA PLANCHA</span>
+    <span class="marquee__item">SMASH BURGERS</span>
+    <span class="marquee__item">QUESO REAL</span>
+    <span class="marquee__item">PAN TOSTADO</span>
+    <span class="marquee__item">DESDE 2018</span>
+    <span class="marquee__item">BARQUISIMETO</span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee__item">HECHO A LA PLANCHA</span>
+    <span class="marquee__item">SMASH BURGERS</span>
+    <span class="marquee__item">QUESO REAL</span>
+    <span class="marquee__item">PAN TOSTADO</span>
+    <span class="marquee__item">DESDE 2018</span>
+    <span class="marquee__item">BARQUISIMETO</span>
+  </div>
+</div>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="section__head reveal">
+    <div>
+      <div class="section__eyebrow">— EL MENÚ —</div>
+      <h2 class="section__title">Pide <span class="accent">con hambre.</span></h2>
+    </div>
+    <p class="section__sub">Filtra por categoría. Cada plato viene con su foto real, descripción honesta y precio en grande. Sin sorpresas.</p>
+  </div>
+
+  <div class="menu__filter reveal" id="filterBar">
+    <button class="filter__btn is-active" data-filter="all"><span class="ico">✦</span> TODO</button>
+    <button class="filter__btn" data-filter="burger"><span class="ico">🍔</span> BURGERS</button>
+    <button class="filter__btn" data-filter="hotdog"><span class="ico">🌭</span> PERROS</button>
+    <button class="filter__btn" data-filter="fries"><span class="ico">🍟</span> PAPAS</button>
+    <button class="filter__btn" data-filter="drink"><span class="ico">🥤</span> REFRESCOS</button>
+  </div>
+
+  <canvas id="menuCanvas"></canvas>
+  <div class="menu__grid" id="menuGrid"><!-- cards injected by JS --></div>
+</section>
+
+<!-- COMBOS -->
+<section class="combos" id="combos">
+  <div class="section__head reveal">
+    <div>
+      <div class="section__eyebrow">— COMBOS —</div>
+      <h2 class="section__title">Más comida, <span class="accent">menos billetera.</span></h2>
+    </div>
+    <p class="section__sub">Tres combos listos para una comida completa. Burger + papas + refresco a precio que no duele.</p>
+  </div>
+  <div class="combos__grid">
+    <div class="combo reveal">
+      <div class="combo__num">COMBO · 01</div>
+      <h3 class="combo__name">EL CLÁSICO</h3>
+      <ul class="combo__items"><li>Tosti Clásica</li><li>Papas Clásicas</li><li>Refresco 500ml</li></ul>
+      <div class="combo__price"><span class="now">$7.80</span><span class="old">$8.80</span></div>
+      <a class="btn btn--primary" href="#contact">PEDIR ESTE</a>
+    </div>
+    <div class="combo reveal">
+      <div class="combo__num">COMBO · 02</div>
+      <h3 class="combo__name">EL DOBLE</h3>
+      <ul class="combo__items"><li>Tosti Doble</li><li>Papas con Queso y Bacon</li><li>Refresco 500ml</li></ul>
+      <div class="combo__price"><span class="now">$10.50</span><span class="old">$11.80</span></div>
+      <a class="btn btn--primary" href="#contact">PEDIR ESTE</a>
+    </div>
+    <div class="combo reveal">
+      <div class="combo__num">COMBO · 03</div>
+      <h3 class="combo__name">PARA COMPARTIR</h3>
+      <ul class="combo__items"><li>2 Tosti Clásicas</li><li>2 Papas Cargadas</li><li>2 Refrescos</li></ul>
+      <div class="combo__price"><span class="now">$16.90</span><span class="old">$19.00</span></div>
+      <a class="btn btn--primary" href="#contact">PEDIR ESTE</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about__wrap">
+    <div class="about__img reveal">
+      <img src="https://agent-cdn.minimax.io/mcp/anon/general/1782082338_8cc532ce.jpg" alt="Interior de TostiBurguer" loading="lazy" onerror="this.style.display='none'">
+    </div>
+    <div class="about__copy reveal">
+      <div class="section__eyebrow">— SOBRE NOSOTROS —</div>
+      <h2 class="section__title">Nacimos con <span class="accent">una plancha</span> y hambre.</h2>
+      <p><strong>TostiBurguer</strong> empezó en el 2018 con una sola cosa clara: hacer la hamburguesa que queríamos comer. Smash sobre plancha caliente, pan brioche tostado, queso que chorrea, salsa de la casa que pica justo.</p>
+      <p>Hoy seguimos igual. Misma carne, mismo pan, misma obsesión por el punto exacto del smash. Si alguna vez te supo a otra cosa, no era nuestra.</p>
+      <div class="about__stats">
+        <div class="stat"><div class="stat__n">8</div><div class="stat__l">Años cocinando</div></div>
+        <div class="stat"><div class="stat__n">120g</div><div class="stat__l">Smash real</div></div>
+        <div class="stat"><div class="stat__n">7</div><div class="stat__l">Días a la semana</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact__inner">
+    <div class="section__eyebrow reveal" style="color:var(--mustard)">— VISÍTANOS —</div>
+    <h2 class="section__title reveal">Te esperamos <span class="accent">cerca.</span></h2>
+    <p class="contact__sub reveal">Pasa por el local, pide a domicilio por WhatsApp o sírvetelo tú mismo en barra. Lo que te provoque.</p>
+    <a class="btn btn--primary reveal" href="https://wa.me/584140000000?text=Hola%20TostiBurguer%2C%20quiero%20pedir" target="_blank" rel="noopener">PEDIR POR WHATSAPP →</a>
+    <div class="contact__grid">
+      <div class="contact__card reveal">
+        <div class="contact__ico">📍</div>
+        <div class="contact__lbl">DIRECCIÓN</div>
+        <div class="contact__val">Av. Principal<br>Barquisimeto, Lara</div>
+      </div>
+      <div class="contact__card reveal">
+        <div class="contact__ico">🕒</div>
+        <div class="contact__lbl">HORARIO</div>
+        <div class="contact__val">Lun–Dom<br>12:00 — 23:00</div>
+      </div>
+      <div class="contact__card reveal">
+        <div class="contact__ico">📞</div>
+        <div class="contact__lbl">DELIVERY</div>
+        <div class="contact__val">WhatsApp<br>+58 414 000 0000</div>
+      </div>
+      <div class="contact__card reveal">
+        <div class="contact__ico">📱</div>
+        <div class="contact__lbl">SÍGUENOS</div>
+        <div class="contact__val">@tostiburguer<br>Instagram · TikTok</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="brand">TOSTI BURGUER</div>
+  <div>SMASH &amp; GRILL · BARQUISIMETO · EST. 2018</div>
+  <div class="copy">© 2025 TostiBurguer. Hecho con hambre en Venezuela.</div>
+</footer>
+
+<script>
+/* ── MENU DATA ─────────────────────────────────── */
+const MENU = [
+  {id:'b1',cat:'burger',tag:'CLÁSICA',name:'Tosti Clásica',price:'$4.50',desc:'Pan brioche tostado, smash 80g, cheddar, lechuga, tomate y salsa de la casa.',img:'https://agent-cdn.minimax.io/mcp/anon/general/1782082339_07dbd9b0.jpg'},
+  {id:'b2',cat:'burger',tag:'DOBLE',name:'Tosti Doble',price:'$6.80',desc:'Doble smash, doble cheddar, cebolla caramelizada y bacon crocante.',img:'https://agent-cdn.minimax.io/mcp/anon/general/1782082339_4cc3422f.jpg'},
+  {id:'b3',cat:'burger',tag:'BBQ',name:'Tosti BBQ',price:'$6.20',desc:'Smash 120g, aros de cebolla, cheddar ahumado y BBQ casera.',img:'https://agent-cdn.minimax.io/mcp/anon/general/1782082339_9fa8db12.jpg'},
+  {id:'b4',cat:'burger',tag:'GOURMET',name:'Tosti Trufa',price:'$8.50',desc:'Smash 120g, gruyere, rúcula y alioli de trufa.',img:'https://agent-cdn.minimax.io/mcp/anon/general/1782082340_264e0f00.jpg'},
+  {id:'b5',cat:'burger',tag:'PICANTE',name:'Tosti Picante',price:'$6.50',desc:'Smash 100g, pepper jack, jalapeños, guacamole y chipotle mayo.',img:'https://agent-cdn.minimax.io/mcp/anon/general/1782082340_91bcaf14.jpg'},
+  {id:'h1',cat:'hotdog',tag:'CLÁSICO',name:'Perro Clásico',price:'$3.50',desc:'Salchicha premium, pan suave, mostaza, ketchup, cebolla y papas hilo.',img:'https://agent-cdn.minimax.io/mcp/anon/general/1782082343_5ca23b49.jpg'},
+  {id:'h2',cat:'hotdog',tag:'XL',name:'Perro BBQ Bacon',price:'$4.80',desc:'Salchicha XL, bacon, cheddar, cebolla crispy y BBQ.',img:'https://agent-cdn.minimax.io/mcp/anon/general/1782082344_bb449c6c.jpg'},
+  {id:'h3',cat:'hotdog',tag:'PICANTE',name:'Perro Picante',price:'$4.50',desc:'Salchicha ahumada, pepper jack, jalapeños, chipotle y guacamole.',img:'https://agent-cdn.minimax.io/mcp/anon/general/1782082344_e9b9f73a.jpg'},
+  {id:'f1',cat:'fries',tag:'CLÁSICAS',name:'Papas Clásicas',price:'$2.50',desc:'Corte grueso, sal marina, doradas y crujientes.',img:'https://agent-cdn.minimax.io/mcp/anon/general/1782082342_48fc814f.jpg'},
+  {id:'f2',cat:'fries',tag:'CARGADAS',name:'Papas con Queso y Bacon',price:'$4.20',desc:'Bañadas en cheddar, bacon crispy y cebollín fresco.',img:'https://agent-cdn.minimax.io/mcp/anon/general/1782082342_f0075340.jpg'},
+  {id:'f3',cat:'fries',tag:'TOSTI',name:'Papas Tosti',price:'$4.80',desc:'Chili, queso cheddar, jalapeños y sour cream.',img:'https://agent-cdn.minimax.io/mcp/anon/general/1782082342_cb3e8ecd.jpg'},
+  {id:'d1',cat:'drink',tag:'COLA',name:'Coca-Cola / Pepsi',price:'$1.80',desc:'Botella 500ml bien fría, con hielo.',img:'https://agent-cdn.minimax.io/mcp/anon/general/1782082341_eaaf9f28.jpg'},
+  {id:'d2',cat:'drink',tag:'NATURAL',name:'Limonada de la Casa',price:'$2.50',desc:'Limón natural, menta fresca y mucho hielo.',img:'https://agent-cdn.minimax.io/mcp/anon/general/1782082341_0c33bbbe.jpg'},
+  {id:'d3',cat:'drink',tag:'INDULGENTE',name:'Malteada de Chocolate',price:'$3.80',desc:'Cremosa, con crema batida y galleta.',img:'https://agent-cdn.minimax.io/mcp/anon/general/1782082341_17b5ddca.jpg'},
+];
+
+const CAT_COLORS = {
+  burger:'rgba(139,74,38,0.18)',
+  hotdog:'rgba(216,49,42,0.18)',
+  fries:'rgba(245,181,36,0.22)',
+  drink:'rgba(127,169,64,0.18)',
+};
+
+/* ── RENDER GRID ───────────────────────────────── */
+const grid = document.getElementById('menuGrid');
+grid.innerHTML = MENU.map(it => `
+  <article class="card reveal" data-cat="${it.cat}" data-id="${it.id}">
+    <div class="card__img">
+      <span class="card__tag">${it.tag}</span>
+      <img src="${it.img}" alt="${it.name}" loading="lazy" onerror="this.style.display='none'">
+    </div>
+    <div class="card__body">
+      <div class="card__head">
+        <h3 class="card__name">${it.name}</h3>
+        <span class="card__price">${it.price}</span>
+      </div>
+      <p class="card__desc">${it.desc}</p>
+      <button class="card__add" type="button">AGREGAR +</button>
+    </div>
+  </article>
+`).join('');
+
+/* ── FILTER ────────────────────────────────────── */
+const filterBar = document.getElementById('filterBar');
+filterBar.addEventListener('click', e => {
+  const btn = e.target.closest('.filter__btn');
+  if (!btn) return;
+  filterBar.querySelectorAll('.filter__btn').forEach(b => b.classList.remove('is-active'));
+  btn.classList.add('is-active');
+  const f = btn.dataset.filter;
+  grid.querySelectorAll('.card').forEach(c => {
+    const show = f === 'all' || c.dataset.cat === f;
+    c.classList.toggle('is-hidden', !show);
+  });
+});
+
+/* ── CANVAS SPOTLIGHT ──────────────────────────── */
+const section = document.querySelector('.menu');
+const canvas = document.getElementById('menuCanvas');
+const ctx = canvas.getContext('2d');
+let spotlight = null; // {x,y,color,radius,alpha}
+let rafId = null;
+
+function resizeCanvas() {
+  const r = section.getBoundingClientRect();
+  canvas.width = r.width * (window.devicePixelRatio || 1);
+  canvas.height = r.height * (window.devicePixelRatio || 1);
+  canvas.style.width = r.width + 'px';
+  canvas.style.height = r.height + 'px';
+  ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+}
+resizeCanvas();
+window.addEventListener('resize', () => { resizeCanvas(); });
+
+function draw() {
+  const w = canvas.width / (window.devicePixelRatio || 1);
+  const h = canvas.height / (window.devicePixelRatio || 1);
+  ctx.clearRect(0, 0, w, h);
+
+  if (spotlight) {
+    // soft radial gradient at hover position
+    const g = ctx.createRadialGradient(spotlight.x, spotlight.y, 0, spotlight.x, spotlight.y, spotlight.radius);
+    g.addColorStop(0, spotlight.color);
+    g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.globalAlpha = spotlight.alpha;
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(spotlight.x, spotlight.y, spotlight.radius, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+
+  // subtle film grain
+  const grainCount = Math.floor((w * h) / 4000);
+  ctx.fillStyle = 'rgba(14,10,8,0.04)';
+  for (let i = 0; i < grainCount; i++) {
+    ctx.fillRect(Math.random() * w, Math.random() * h, 1, 1);
+  }
+
+  // border accents at edges
+  const grad = ctx.createLinearGradient(0, 0, 0, h);
+  grad.addColorStop(0, 'rgba(245,181,36,0.06)');
+  grad.addColorStop(0.5, 'rgba(245,181,36,0)');
+  grad.addColorStop(1, 'rgba(216,49,42,0.06)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, w, h);
+
+  rafId = requestAnimationFrame(draw);
+}
+draw();
+
+grid.addEventListener('mousemove', e => {
+  const card = e.target.closest('.card');
+  if (!card) { spotlight = null; return; }
+  const r = section.getBoundingClientRect();
+  const cr = card.getBoundingClientRect();
+  spotlight = {
+    x: cr.left - r.left + cr.width / 2,
+    y: cr.top - r.top + cr.height / 2,
+    color: CAT_COLORS[card.dataset.cat] || 'rgba(245,181,36,0.18)',
+    radius: Math.max(cr.width, cr.height) * 0.85,
+    alpha: 1
+  };
+});
+grid.addEventListener('mouseleave', () => { spotlight = null; });
+
+/* ── REVEAL ON SCROLL ──────────────────────────── */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(en => {
+    if (en.isIntersecting) {
+      en.target.classList.add('is-in');
+      io.unobserve(en.target);
+    }
+  });
+}, {threshold: 0.12});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ── SMOOTH SCROLL ─────────────────────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href').slice(1);
+    if (!id) return;
+    const target = document.getElementById(id);
+    if (target) {
+      e.preventDefault();
+      const navH = document.getElementById('nav').offsetHeight;
+      window.scrollTo({top: target.offsetTop - navH - 8, behavior: 'smooth'});
+    }
+  });
+});
+
+/* ── ADD TO CART (visual feedback only) ────────── */
+grid.addEventListener('click', e => {
+  const addBtn = e.target.closest('.card__add');
+  if (!addBtn) return;
+  const card = addBtn.closest('.card');
+  const name = card.querySelector('.card__name').textContent;
+  addBtn.textContent = '✓ AÑADIDO';
+  addBtn.style.background = 'var(--lettuce)';
+  addBtn.style.color = 'var(--ink)';
+  setTimeout(() => {
+    addBtn.textContent = 'AGREGAR +';
+    addBtn.style.background = '';
+    addBtn.style.color = '';
+  }, 1400);
+});
+</script>
+</body>
+</html>
